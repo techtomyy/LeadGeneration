@@ -1,0 +1,704 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadHarvest AI - Professional Lead Generation Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563EB',
+                        'primary-dark': '#1E40AF',
+                        'accent': '#10B981',
+                        'warning': '#F59E0B',
+                        'success': '#22C55E',
+                        'error': '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-inter">
+    <!-- @COMPONENT: AppLayout -->
+    <div class="min-h-screen flex">
+        
+        <!-- @COMPONENT: Sidebar -->
+        <aside class="w-64 bg-white shadow-sm border-r border-slate-200 hidden lg:block">
+            <div class="p-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-seedling text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-slate-800">LeadHarvest AI</h1>
+                </div>
+            </div>
+            
+            <nav class="px-4 pb-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#dashboard" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-chart-pie w-5 mr-3"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#leads" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-users w-5 mr-3"></i>
+                            Lead Finder
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#history" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-history w-5 mr-3"></i>
+                            Search History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#integrations" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-plug w-5 mr-3"></i>
+                            Integrations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#billing" class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg">
+                            <i class="fas fa-credit-card w-5 mr-3"></i>
+                            Billing & Plans
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent -->
+        <main class="flex-1 overflow-y-auto">
+            
+            <!-- @COMPONENT: TopHeader -->
+            <header class="bg-white border-b border-slate-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button class="lg:hidden p-2 text-slate-500">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h2 class="text-2xl font-semibold text-slate-800">Lead Generation Dashboard</h2>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <!-- @COMPONENT: CreditCounter -->
+                        <div class="bg-accent/10 text-accent px-4 py-2 rounded-lg flex items-center space-x-2">
+                            <i class="fas fa-coins text-sm"></i>
+                            <span class="font-semibold" data-bind="user.remainingCredits">1,847 Credits</span>
+                        </div>
+                        <!-- @END_COMPONENT: CreditCounter -->
+                        
+                        <div class="relative">
+                            <button class="flex items-center space-x-2 p-2 rounded-lg hover:bg-slate-100">
+                                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-medium" data-bind="user.initials">JD</span>
+                                </div>
+                                <span class="text-slate-700 font-medium" data-bind="user.name">John Doe</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: TopHeader -->
+
+            <div class="p-6">
+                
+                <!-- @COMPONENT: StatsCards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-medium">Total Leads Generated</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="stats.totalLeads">12,847</p>
+                            </div>
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-primary text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-success text-sm font-medium">+12% vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-medium">Email Verified</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="stats.verifiedEmails">8,492</p>
+                            </div>
+                            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope-circle-check text-accent text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-success text-sm font-medium">96.2% accuracy rate</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-medium">Active Searches</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="stats.activeSearches">23</p>
+                            </div>
+                            <div class="w-12 h-12 bg-warning/10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-search text-warning text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-slate-500 text-sm font-medium">5 in progress</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-medium">Credits Used</p>
+                                <p class="text-2xl font-bold text-slate-800" data-bind="stats.creditsUsed">1,653</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-coins text-purple-600 text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-slate-500 text-sm font-medium">this month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: StatsCards -->
+
+                <!-- @COMPONENT: LeadSearchInterface -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-slate-800">Lead Search & Generation</h3>
+                        <div class="flex items-center space-x-2 text-sm text-slate-500">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+                                <span>Live Scraping Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Industry Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Industry</label>
+                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary" data-implementation="Should populate from industry list">
+                                <option value="">Select Industry</option>
+                                <option value="healthcare">Healthcare & Medical</option>
+                                <option value="technology">Technology & Software</option>
+                                <option value="finance">Finance & Banking</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="legal">Legal Services</option>
+                                <option value="education">Education</option>
+                                <option value="retail">Retail & E-commerce</option>
+                                <option value="manufacturing">Manufacturing</option>
+                            </select>
+                        </div>
+
+                        <!-- Location Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Location</label>
+                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary" data-implementation="Should integrate with area selection API">
+                                <option value="">Select Location</option>
+                                <option value="new-york-ny">New York, NY</option>
+                                <option value="los-angeles-ca">Los Angeles, CA</option>
+                                <option value="chicago-il">Chicago, IL</option>
+                                <option value="houston-tx">Houston, TX</option>
+                                <option value="miami-fl">Miami, FL</option>
+                                <option value="seattle-wa">Seattle, WA</option>
+                                <option value="boston-ma">Boston, MA</option>
+                            </select>
+                        </div>
+
+                        <!-- Company Size -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Company Size</label>
+                            <select class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                <option value="">Any Size</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201-500">201-500 employees</option>
+                                <option value="500+">500+ employees</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Job Title -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Job Title/Role</label>
+                            <input type="text" placeholder="e.g. Marketing Director, CEO, Developer" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                        </div>
+
+                        <!-- Sources -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Data Sources</label>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary/20" checked>
+                                    <span class="ml-2 text-sm text-slate-600">LinkedIn</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary/20" checked>
+                                    <span class="ml-2 text-sm text-slate-600">Google Maps</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary/20" checked>
+                                    <span class="ml-2 text-sm text-slate-600">Yellow Pages</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary/20">
+                                    <span class="ml-2 text-sm text-slate-600">Company Websites</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors flex items-center space-x-2" data-event="click:handleSearch">
+                                <i class="fas fa-search"></i>
+                                <span>Start Lead Search</span>
+                            </button>
+                            <button class="bg-slate-100 text-slate-700 px-4 py-3 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+                                Reset Filters
+                            </button>
+                        </div>
+                        
+                        <div class="text-sm text-slate-500">
+                            Estimated cost: <span class="font-semibold text-slate-700">45-60 credits</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: LeadSearchInterface -->
+
+                <!-- @COMPONENT: SearchResults -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-800">Search Results</h3>
+                            <p class="text-sm text-slate-500 mt-1">Found <span class="font-medium text-slate-700" data-bind="results.total">1,247</span> leads matching your criteria</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <button class="bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent/90 transition-colors flex items-center space-x-2" data-event="click:handleExportCSV">
+                                <i class="fas fa-download"></i>
+                                <span>Export CSV</span>
+                            </button>
+                            <button class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-200 transition-colors flex items-center space-x-2" data-event="click:handleExportExcel">
+                                <i class="fas fa-file-excel"></i>
+                                <span>Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-slate-200">
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">
+                                        <input type="checkbox" class="rounded border-slate-300">
+                                    </th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Company</th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Contact</th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Email Status</th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Location</th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Source</th>
+                                    <th class="text-left py-3 px-4 font-medium text-slate-600">Quality</th>
+                                </tr>
+                            </thead>
+                            <tbody data-mock="true">
+                                <!-- @MAP: leads.map(lead => ( -->
+                                <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                    <td class="py-4 px-4">
+                                        <input type="checkbox" class="rounded border-slate-300">
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800" data-bind="lead.company">TechCorp Solutions</div>
+                                            <div class="text-sm text-slate-500" data-bind="lead.industry">Technology & Software</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800" data-bind="lead.name">Sarah Johnson</div>
+                                            <div class="text-sm text-slate-500" data-bind="lead.title">Marketing Director</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-2 h-2 bg-success rounded-full"></div>
+                                            <span class="text-sm font-medium text-success">Verified</span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 mt-1" data-bind="lead.email">sarah.j@techcorp.com</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="text-sm text-slate-600" data-bind="lead.location">New York, NY</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full" data-bind="lead.source">LinkedIn</span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <div class="flex space-x-1">
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-slate-300 text-xs"></i>
+                                            </div>
+                                            <span class="text-xs text-slate-500 ml-2">4.2</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                    <td class="py-4 px-4">
+                                        <input type="checkbox" class="rounded border-slate-300">
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800">HealthFirst Clinic</div>
+                                            <div class="text-sm text-slate-500">Healthcare & Medical</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800">Dr. Michael Chen</div>
+                                            <div class="text-sm text-slate-500">Practice Manager</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-2 h-2 bg-warning rounded-full"></div>
+                                            <span class="text-sm font-medium text-warning">Pending</span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 mt-1">m.chen@healthfirst.com</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="text-sm text-slate-600">Chicago, IL</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">Google Maps</span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <div class="flex space-x-1">
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                            </div>
+                                            <span class="text-xs text-slate-500 ml-2">4.8</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                    <td class="py-4 px-4">
+                                        <input type="checkbox" class="rounded border-slate-300">
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800">Legal Partners LLC</div>
+                                            <div class="text-sm text-slate-500">Legal Services</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div>
+                                            <div class="font-medium text-slate-800">Jennifer Adams</div>
+                                            <div class="text-sm text-slate-500">Senior Partner</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-2 h-2 bg-error rounded-full"></div>
+                                            <span class="text-sm font-medium text-error">Invalid</span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 mt-1">j.adams@legalpartners.com</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="text-sm text-slate-600">Los Angeles, CA</div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">Yellow Pages</span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <div class="flex space-x-1">
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-warning text-xs"></i>
+                                                <i class="fas fa-star text-slate-300 text-xs"></i>
+                                                <i class="fas fa-star text-slate-300 text-xs"></i>
+                                                <i class="fas fa-star text-slate-300 text-xs"></i>
+                                            </div>
+                                            <span class="text-xs text-slate-500 ml-2">2.1</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- @END_MAP )) -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-200">
+                        <div class="text-sm text-slate-500">
+                            Showing <span class="font-medium">1-25</span> of <span class="font-medium">1,247</span> results
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-2 border border-slate-300 rounded-lg text-slate-500 hover:bg-slate-50">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+                            <button class="px-3 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">2</button>
+                            <button class="px-3 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">3</button>
+                            <span class="px-2 text-slate-500">...</span>
+                            <button class="px-3 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">50</button>
+                            <button class="px-3 py-2 border border-slate-300 rounded-lg text-slate-500 hover:bg-slate-50">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: SearchResults -->
+            </div>
+        </main>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: AppLayout -->
+
+    <!-- @COMPONENT: PricingModal (Hidden by default) -->
+    <div id="pricingModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-slate-200">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold text-slate-800">Choose Your Plan</h2>
+                    <button class="p-2 text-slate-500 hover:text-slate-700" data-event="click:closePricingModal">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <p class="text-slate-600 mt-2">Select the perfect plan for your lead generation needs</p>
+            </div>
+
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Starter Plan -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:border-primary/50 transition-colors">
+                        <div class="text-center">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2">Starter</h3>
+                            <div class="mb-4">
+                                <span class="text-3xl font-bold text-slate-800">$29</span>
+                                <span class="text-slate-500">/month</span>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-600 mb-6">
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>300 verified leads</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Email verification</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Area selection</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>CSV/Excel export</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-times text-slate-400"></i>
+                                    <span>API access</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-slate-100 text-slate-700 py-2 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="border-2 border-primary rounded-xl p-6 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-primary text-white px-4 py-1 text-sm font-medium rounded-full">Most Popular</span>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2">Pro</h3>
+                            <div class="mb-4">
+                                <span class="text-3xl font-bold text-slate-800">$59</span>
+                                <span class="text-slate-500">/month</span>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-600 mb-6">
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>1,200 verified leads</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Email verification</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Area selection</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>CSV/Excel export</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Basic API access</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agency Plan -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:border-primary/50 transition-colors">
+                        <div class="text-center">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2">Agency</h3>
+                            <div class="mb-4">
+                                <span class="text-3xl font-bold text-slate-800">$149</span>
+                                <span class="text-slate-500">/month</span>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-600 mb-6">
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>5,000 verified leads</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Priority verification</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Advanced filters</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Full API access</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>CRM integrations</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-slate-100 text-slate-700 py-2 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+                                Choose Plan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:border-primary/50 transition-colors">
+                        <div class="text-center">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2">Enterprise</h3>
+                            <div class="mb-4">
+                                <span class="text-3xl font-bold text-slate-800">Custom</span>
+                                <span class="text-slate-500">/month</span>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-600 mb-6">
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Unlimited leads</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Dedicated support</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Custom integrations</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>White-label option</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-2">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>SLA guarantee</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-accent text-white py-2 rounded-lg font-medium hover:bg-accent/90 transition-colors">
+                                Contact Sales
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-slate-500">All plans include 24/7 support and 99.9% uptime SLA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: PricingModal -->
+
+    <script>
+        // TODO: Implement business logic, API calls, or state management
+        (function() {
+            // Modal functionality
+            function showPricingModal() {
+                document.getElementById('pricingModal').classList.remove('hidden');
+            }
+
+            function closePricingModal() {
+                document.getElementById('pricingModal').classList.add('hidden');
+            }
+
+            // Search functionality placeholder
+            function handleSearch() {
+                // TODO: Implement lead search logic
+                console.log('Search initiated...');
+            }
+
+            // Export functionality placeholders
+            function handleExportCSV() {
+                // TODO: Implement CSV export logic
+                console.log('Exporting to CSV...');
+            }
+
+            function handleExportExcel() {
+                // TODO: Implement Excel export logic
+                console.log('Exporting to Excel...');
+            }
+
+            // Make functions globally accessible for onclick events
+            window.showPricingModal = showPricingModal;
+            window.closePricingModal = closePricingModal;
+            window.handleSearch = handleSearch;
+            window.handleExportCSV = handleExportCSV;
+            window.handleExportExcel = handleExportExcel;
+
+            // Initialize page
+            document.addEventListener('DOMContentLoaded', function() {
+                // TODO: Initialize dashboard data
+                // TODO: Setup real-time updates
+                // TODO: Initialize search filters
+                console.log('LeadHarvest AI Dashboard initialized');
+            });
+        })();
+    </script>
+</body>
+</html>
