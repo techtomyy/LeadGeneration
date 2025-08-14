@@ -5,11 +5,13 @@ import {
   HistoryIcon, 
   PlugIcon, 
   CreditCardIcon,
-  Sprout 
+  Sprout,
+  HomeIcon
 } from "lucide-react";
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: ChartPieIcon },
+  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "Dashboard", href: "/dashboard", icon: ChartPieIcon },
   { name: "Lead Finder", href: "/leads", icon: UsersIcon },
   { name: "Search History", href: "/history", icon: HistoryIcon },
   { name: "Integrations", href: "/integrations", icon: PlugIcon },
@@ -34,7 +36,8 @@ export default function Sidebar() {
         <ul className="space-y-2">
           {navigation.map((item) => {
             const isActive = location === item.href || 
-              (item.href !== "/" && location.startsWith(item.href));
+              (item.href !== "/" && location.startsWith(item.href)) ||
+              (item.href === "/" && location === "/");
             
             return (
               <li key={item.name}>

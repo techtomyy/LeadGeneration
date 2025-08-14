@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { UsersIcon, MailIcon, SearchIcon, CoinsIcon } from "lucide-react";
+import { UsersIcon, MailIcon, SearchIcon, CoinsIcon, TrendingUp } from "lucide-react";
 
 interface StatsCardsProps {
   stats?: {
@@ -13,7 +13,7 @@ interface StatsCardsProps {
 export default function StatsCards({ stats }: StatsCardsProps) {
   const statsData = [
     {
-      title: "Total Leads Generated",
+      title: "Lead Generated",
       value: stats?.totalLeads?.toLocaleString() || "0",
       change: "+12% vs last month",
       icon: UsersIcon,
@@ -23,7 +23,7 @@ export default function StatsCards({ stats }: StatsCardsProps) {
     {
       title: "Email Verified",
       value: stats?.verifiedEmails?.toLocaleString() || "0",
-      change: "96.2% accuracy rate",
+      change: "96.2% accuracy",
       icon: MailIcon,
       iconBg: "bg-green-100",
       iconColor: "text-green-600",
@@ -49,21 +49,22 @@ export default function StatsCards({ stats }: StatsCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       {statsData.map((stat, index) => (
-        <Card key={index} className="p-6">
+        <Card key={index} className="p-6 border-0 shadow-lg bg-gradient-to-br from-white to-slate-50">
           <CardContent className="p-0">
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex items-start justify-between">
+              <div className="flex-1 min-w-0">
                 <p className="text-slate-500 text-sm font-medium">{stat.title}</p>
-                <p className="text-2xl font-bold text-slate-800 mt-1" data-testid={`stat-${stat.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                <p className="text-2xl font-semibold text-slate-900 mt-1" data-testid={`stat-${stat.title.toLowerCase().replace(/\s+/g, '-')}`}>
                   {stat.value}
                 </p>
+                <div className="mt-3 inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 whitespace-nowrap">
+                  <TrendingUp className="w-3 h-3 mr-1 text-green-600 flex-shrink-0" />
+                  <span className="truncate">{stat.change}</span>
+                </div>
               </div>
-              <div className={`w-12 h-12 ${stat.iconBg} rounded-lg flex items-center justify-center`}>
-                <stat.icon className={`${stat.iconColor} w-6 h-6`} />
+              <div className={`w-14 h-14 ${stat.iconBg} rounded-xl flex items-center justify-center shadow-inner flex-shrink-0 ml-3`}>
+                <stat.icon className={`${stat.iconColor} w-7 h-7`} />
               </div>
-            </div>
-            <div className="mt-4 flex items-center">
-              <span className="text-green-600 text-sm font-medium">{stat.change}</span>
             </div>
           </CardContent>
         </Card>

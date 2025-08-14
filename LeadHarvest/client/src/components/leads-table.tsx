@@ -135,107 +135,110 @@ export default function LeadsTable({ leads, total }: LeadsTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-slate-500">
-          {selectedLeads.length > 0 && (
-            <span className="mr-4">
-              {selectedLeads.length} leads selected
+      {/* Compact summary bar */}
+      <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-2">
+        <div className="text-xs text-slate-600">
+          {selectedLeads.length > 0 ? (
+            <span>
+              {selectedLeads.length} selected • Export or refine filters
             </span>
+          ) : (
+            <span>Tip: Select rows to export only the leads you need</span>
           )}
         </div>
-        
-        <div className="flex items-center space-x-3">
+
+        <div className="flex items-center space-x-2">
           <Button
             onClick={handleExportCsv}
-            className="bg-green-600 text-white hover:bg-green-700 flex items-center space-x-2"
+            className="bg-green-600 text-white hover:bg-green-700 h-8 px-3"
             data-testid="button-export-csv"
           >
-            <DownloadIcon className="w-4 h-4" />
-            <span>Export CSV</span>
+            <DownloadIcon className="w-3.5 h-3.5" />
+            <span className="text-xs">CSV</span>
           </Button>
           <Button
             onClick={handleExportExcel}
             variant="outline"
-            className="flex items-center space-x-2"
+            className="h-8 px-3"
             data-testid="button-export-excel"
           >
-            <FileSpreadsheetIcon className="w-4 h-4" />
-            <span>Export Excel</span>
+            <FileSpreadsheetIcon className="w-3.5 h-3.5" />
+            <span className="text-xs">Excel</span>
           </Button>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+        <table className="w-full border-collapse text-sm">
+          <thead className="bg-slate-50">
             <tr className="border-b border-slate-200">
-              <th className="text-left py-3 px-4 font-medium text-slate-600">
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">
                 <Checkbox
                   checked={selectedLeads.length === leads.length && leads.length > 0}
                   onCheckedChange={handleSelectAll}
                   data-testid="checkbox-select-all"
                 />
               </th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Company</th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Contact</th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Email Status</th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Location</th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Source</th>
-              <th className="text-left py-3 px-4 font-medium text-slate-600">Quality</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Company</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Contact</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Email Status</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Location</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Source</th>
+              <th className="text-left py-2.5 px-4 font-medium text-slate-600">Quality</th>
             </tr>
           </thead>
           <tbody>
-            {leads.map((lead) => (
-              <tr key={lead.id} className="border-b border-slate-100 hover:bg-slate-50">
-                <td className="py-4 px-4">
+            {leads.map((lead, idx) => (
+              <tr key={lead.id} className={`border-b border-slate-100 ${idx % 2 === 1 ? 'bg-slate-50/40' : ''} hover:bg-slate-50`}>
+                <td className="py-3 px-4">
                   <Checkbox
                     checked={selectedLeads.includes(lead.id)}
                     onCheckedChange={(checked) => handleSelectLead(lead.id, checked as boolean)}
                     data-testid={`checkbox-lead-${lead.id}`}
                   />
                 </td>
-                <td className="py-4 px-4">
+                <td className="py-3 px-4">
                   <div>
                     <div className="font-medium text-slate-800" data-testid={`text-company-${lead.id}`}>
                       {lead.company}
                     </div>
-                    <div className="text-sm text-slate-500">{lead.industry}</div>
+                    <div className="text-xs text-slate-500">{lead.industry}</div>
                   </div>
                 </td>
-                <td className="py-4 px-4">
+                <td className="py-3 px-4">
                   <div>
                     <div className="font-medium text-slate-800" data-testid={`text-contact-${lead.id}`}>
                       {lead.contactName}
                     </div>
-                    <div className="text-sm text-slate-500">{lead.contactTitle}</div>
+                    <div className="text-xs text-slate-500">{lead.contactTitle}</div>
                   </div>
                 </td>
-                <td className="py-4 px-4">
+                <td className="py-3 px-4">
                   <div className="space-y-1">
                     <Badge className={getEmailStatusColor(lead.emailStatus)}>
                       {lead.emailStatus}
                     </Badge>
-                    <div className="text-xs text-slate-500" data-testid={`text-email-${lead.id}`}>
+                    <div className="text-[11px] text-slate-500" data-testid={`text-email-${lead.id}`}>
                       {lead.email}
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-4">
-                  <div className="text-sm text-slate-600" data-testid={`text-location-${lead.id}`}>
+                <td className="py-3 px-4">
+                  <div className="text-xs text-slate-600" data-testid={`text-location-${lead.id}`}>
                     {lead.location}
                   </div>
                 </td>
-                <td className="py-4 px-4">
+                <td className="py-3 px-4">
                   <Badge className={getSourceColor(lead.source)}>
                     {lead.source}
                   </Badge>
                 </td>
-                <td className="py-4 px-4">
+                <td className="py-3 px-4">
                   <div className="flex items-center space-x-2">
                     <div className="flex space-x-1">
                       {renderStars(lead.qualityScore)}
                     </div>
-                    <span className="text-xs text-slate-500">{lead.qualityScore.toFixed(1)}</span>
+                    <span className="text-[11px] text-slate-500">{lead.qualityScore.toFixed(1)}</span>
                   </div>
                 </td>
               </tr>
@@ -245,16 +248,17 @@ export default function LeadsTable({ leads, total }: LeadsTableProps) {
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-        <div className="text-sm text-slate-500">
-          Showing <span className="font-medium">1-{Math.min(leadsPerPage, leads.length)}</span> of{" "}
-          <span className="font-medium">{total}</span> results
+      <div className="flex items-center justify-between rounded-xl bg-white border border-slate-200 px-3 py-2">
+        <div className="text-xs text-slate-600">
+          Showing <span className="font-medium">1-{Math.min(leadsPerPage, leads.length)}</span> of {" "}
+          <span className="font-medium">{total}</span>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1.5">
           <Button
             variant="outline"
             size="sm"
+            className="h-8 px-2"
             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
             disabled={currentPage === 1}
             data-testid="button-prev-page"
@@ -269,6 +273,7 @@ export default function LeadsTable({ leads, total }: LeadsTableProps) {
                 key={pageNum}
                 variant={currentPage === pageNum ? "default" : "outline"}
                 size="sm"
+                className="h-8 px-3"
                 onClick={() => setCurrentPage(pageNum)}
                 data-testid={`button-page-${pageNum}`}
               >
@@ -283,6 +288,7 @@ export default function LeadsTable({ leads, total }: LeadsTableProps) {
               <Button
                 variant="outline"
                 size="sm"
+                className="h-8 px-3"
                 onClick={() => setCurrentPage(totalPages)}
               >
                 {totalPages}
@@ -293,6 +299,7 @@ export default function LeadsTable({ leads, total }: LeadsTableProps) {
           <Button
             variant="outline"
             size="sm"
+            className="h-8 px-2"
             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
             disabled={currentPage === totalPages}
             data-testid="button-next-page"
