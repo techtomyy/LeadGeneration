@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure full screen background coverage */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Full screen background */
+.min-h-screen {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Background Colors */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-input: #0f172a;
+  --bg-accent: #EEF4FF;
+  
+  /* Text Colors */
+  --text-primary: #EEF4FF;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #a855f7;
+  
+  /* Border Colors */
+  --border-primary: #475569;
+  --border-input: #98A6D8;
+  --border-accent: #a855f7;
+  
+  /* Button Colors */
+  --btn-primary: #a855f7;
+  --btn-secondary: #3b82f6;
+  --btn-hover: #9333ea;
+}
