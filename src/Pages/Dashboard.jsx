@@ -15,6 +15,14 @@ export default function Dashboard() {
     if (!isAuthenticated) {
       navigate('/login');
     }
+
+    // Add smooth scrolling to the document
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Cleanup function to remove smooth scrolling
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, [navigate]);
 
   const handleLogout = () => {
@@ -32,12 +40,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] font-['Inter',sans-serif] flex flex-col">
+    <div className="min-h-screen bg-[var(--bg-primary)] font-['Inter',sans-serif] flex flex-col scroll-smooth">
       {/* Header */}
       <Header onLogout={handleLogout} onMenuToggle={toggleSidebar} />
       
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-2 lg:p-4 relative">
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-2 lg:p-4 relative overflow-hidden">
         {/* Mobile Overlay */}
         {isSidebarOpen && (
           <div 
@@ -54,7 +62,7 @@ export default function Dashboard() {
         </div>
         
         {/* Dashboard Content */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto scroll-smooth">
           <DashboardContent />
         </div>
       </div>

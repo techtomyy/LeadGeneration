@@ -115,8 +115,8 @@ export default function Sidebar({ currentPage = 'dashboard' }) {
   };
 
   return (
-    <aside className="w-full lg:w-64 h-full bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] border border-[var(--border-input)] rounded-2xl shadow-xl backdrop-blur-sm">
-      <nav className="p-3 lg:p-6 h-full overflow-y-auto">
+    <aside className="w-full lg:w-64 h-full bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] border border-[var(--border-input)] rounded-2xl shadow-xl backdrop-blur-sm scroll-smooth">
+      <nav className="p-3 lg:p-6 h-full overflow-y-auto scroll-smooth">
         {/* Main Section */}
         <div className="mb-4 lg:mb-6 flex flex-col">
           <h3 className="text-[10px] lg:text-[11px] font-bold text-[var(--text-sidebar)] uppercase tracking-[0.2em] mb-3 lg:mb-4 opacity-70">Main</h3>
@@ -129,7 +129,7 @@ export default function Sidebar({ currentPage = 'dashboard' }) {
                     e.preventDefault();
                     handleNavigation(item.path);
                   }}
-                  className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline ${
+                  className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline hover:scale-105 ${
                     currentPage === item.id
                       ? 'text-[var(--text-primary)]  border-2 border-[var(--border-input)] hover:bg-[var(--bg-input)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-input)]'
@@ -155,7 +155,7 @@ export default function Sidebar({ currentPage = 'dashboard' }) {
                     e.preventDefault();
                     handleNavigation(item.path);
                   }}
-                   className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline ${
+                   className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline hover:scale-105 ${
                     currentPage === item.id
                       ? 'text-[var(--text-primary)]  border-2 border-[var(--border-input)] hover:bg-[var(--bg-input)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-input)]'
@@ -180,7 +180,7 @@ export default function Sidebar({ currentPage = 'dashboard' }) {
                     e.preventDefault();
                     handleNavigation(item.path);
                   }}
-                  className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline ${
+                  className={`block w-auto text-left flex items-center space-x-2 lg:space-x-3 text-xs lg:text-sm font-medium transition-all duration-300 cursor-pointer py-1.5 lg:py-2 px-2 lg:px-3 rounded-lg no-underline hover:scale-105 ${
                     currentPage === item.id
                       ? 'text-[var(--text-primary)]  border-2 border-[var(--border-input)] hover:bg-[var(--bg-input)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-input)]'

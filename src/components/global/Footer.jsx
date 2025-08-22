@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-transparent border border-[var(--border-input)] px-3 sm:px-6 py-3 sm:py-4 rounded-2xl m-2">
+    <footer className="w-auto bg-transparent border border-[var(--border-input)] px-3 sm:px-6 py-3 sm:py-4 rounded-2xl m-2">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
         {/* Left side - Copyright */}
         <div className="text-xs sm:text-sm text-[var(--text-secondary)] text-center sm:text-left">

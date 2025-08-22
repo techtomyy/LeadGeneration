@@ -1,6 +1,6 @@
 export default function DashboardContent() {
   return (
-    <main className="flex-1 bg-[var(--bg-primary)] p-2 sm:p-4 border border-[var(--border-input)] rounded-2xl">
+    <main className="flex-1 bg-[var(--bg-primary)] p-2 sm:p-4 border border-[var(--border-input)] rounded-2xl scroll-smooth overflow-y-auto">
       {/* Welcome Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
         <div>
@@ -20,7 +20,7 @@ export default function DashboardContent() {
       {/* Live Engine Snapshot Card and Quick Actions Card - Responsive Grid Layout */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         {/* Live Engine Snapshot Card */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-3 sm:p-4 border border-[var(--border-primary)]">
+        <div className="bg-[var(--bg-secondary)] rounded-xl p-3 sm:p-4 border border-[var(--border-primary)] scroll-smooth">
           <div className="flex items-start sm:items-center justify-between mb-4">
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-[var(--text-secondary)] mb-1">Live engine snapshot</h2>
@@ -47,32 +47,32 @@ export default function DashboardContent() {
 
           {/* Action Buttons - Responsive Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 my-6 sm:my-12">
-            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg font-medium text-sm" style={{ background: 'var(--btn-gradient)' }}>
+            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg font-medium text-sm transition-all duration-300 hover:scale-105" style={{ background: 'var(--btn-gradient)' }}>
               Open Latest List
             </button>
-            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
+            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105 text-sm">
               Auto-refresh
             </button>
-            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
+            <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105 text-sm">
               Queue
             </button>
           </div>
         </div>
 
         {/* Combined Quick Actions and Recent Lists Card */}
-        <div className="bg-[var(--bg-secondary)] rounded-xl p-3 sm:p-4 border border-[var(--border-primary)]">
+        <div className="bg-[var(--bg-secondary)] rounded-xl p-3 sm:p-4 border border-[var(--border-primary)] scroll-smooth">
           {/* Quick Actions Section */}
           <div className="mb-4 sm:mb-6">
             <h3 className="text-base sm:text-lg font-semibold text-[var(--text-secondary)] mb-1">Quick Actions</h3>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] mb-4">One-click</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 my-6 sm:my-12">
-              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg font-medium text-sm" style={{ background: 'var(--btn-gradient)' }}>
+              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg font-medium text-sm transition-all duration-300 hover:scale-105" style={{ background: 'var(--btn-gradient)' }}>
                 Lead Finder
               </button>
-              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
+              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105 text-sm">
                 Industry Packages
               </button>
-              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
+              <button className="px-3 sm:px-4 py-2 text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105 text-sm">
                 Connect CRM
               </button>
             </div>
@@ -92,7 +92,7 @@ export default function DashboardContent() {
 
             <div className="space-y-3">
               {/* List Item 1 */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-[var(--border-primary)] last:border-b-0 space-y-2 sm:space-y-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-[var(--border-primary)] last:border-b-0 space-y-2 sm:space-y-0 hover:bg-[var(--bg-primary)] transition-all duration-300 rounded-lg px-2">
                 <div className="flex-1">
                   <div className="font-medium text-[var(--text-secondary)] text-sm sm:text-base">Dentists - NYC</div>
                   <div className="sm:hidden text-xs text-[var(--text-muted)]">Aug 10 • 412 verified</div>
@@ -100,14 +100,14 @@ export default function DashboardContent() {
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">Aug 10</div>
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">412</div>
                 <div className="w-full sm:w-16 text-center">
-                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors">
+                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105">
                     Open
                   </button>
                 </div>
               </div>
 
               {/* List Item 2 */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-[var(--border-primary)] last:border-b-0 space-y-2 sm:space-y-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-[var(--border-primary)] last:border-b-0 space-y-2 sm:space-y-0 hover:bg-[var(--bg-primary)] transition-all duration-300 rounded-lg px-2">
                 <div className="flex-1">
                   <div className="font-medium text-[var(--text-secondary)] text-sm sm:text-base">IT Services - CA</div>
                   <div className="sm:hidden text-xs text-[var(--text-muted)]">Aug 11 • 226 verified</div>
@@ -115,14 +115,14 @@ export default function DashboardContent() {
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">Aug 11</div>
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">226</div>
                 <div className="w-full sm:w-16 text-center">
-                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors">
+                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105">
                     Open
                   </button>
                 </div>
               </div>
 
               {/* List Item 3 */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 space-y-2 sm:space-y-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 space-y-2 sm:space-y-0 hover:bg-[var(--bg-primary)] transition-all duration-300 rounded-lg px-2">
                 <div className="flex-1">
                   <div className="font-medium text-[var(--text-secondary)] text-sm sm:text-base">Restaurants - TX</div>
                   <div className="sm:hidden text-xs text-[var(--text-muted)]">Aug 14 • 318 verified</div>
@@ -130,7 +130,7 @@ export default function DashboardContent() {
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">Aug 14</div>
                 <div className="hidden sm:block w-20 text-center text-sm text-[var(--text-secondary)]">318</div>
                 <div className="w-full sm:w-16 text-center">
-                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors">
+                  <button className="w-full sm:w-auto px-3 py-1 text-[var(--text-secondary)] rounded text-sm border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-all duration-300 hover:scale-105">
                     Open
                   </button>
                 </div>
