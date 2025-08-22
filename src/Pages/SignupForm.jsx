@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { loginUser } from "../service/authService"; // import service
-import LoginHeader from "../components/login/LoginHeader";
-import LoginForm from "../components/login/LoginForm";
-import LoginDivider from "../components/login/LoginDivider";
-import GoogleLoginButton from "../components/login/GoogleLoginButton";
-import LoginButton from "../components/login/LoginButton";
-import LoginFooter from "../components/login/LoginFooter";
+import { registerUser } from "../service/authService"; // import the service
+import SignupHeader from "../components/signup/SignupHeader";
+import NameFields from "../components/signup/NameFields";
+import FormInput from "../components/signup/FormInput";
+import FormDivider from "../components/signup/FormDivider";
+import GoogleSignupButton from "../components/signup/GoogleSignupButton";
+import SubmitButton from "../components/signup/SubmitButton";
+import SignupFooter from "../components/signup/SignupFooter";
 
-export default function Login() {
+export default function Signup() {
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -19,30 +22,51 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await loginUser(formData);
-      console.log("Login successful:", res);
-      alert("Welcome back!");
-      // redirect to dashboard if needed
-      // navigate("/dashboard");
+      const res = await registerUser({
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log("User registered:", res);
+      alert("Signup successful!");
     } catch (error) {
-      console.error("Login failed:", error);
-      alert("Login failed: " + error);
+      console.error("Signup failed:", error);
+      alert("Signup failed: " + error);
     }
   };
 
   return (
     <div className="min-h-screen w-screen flex items-center justify-center bg-[var(--bg-primary)]">
       <div className="w-[584px] rounded-[20px] shadow-2xl border backdrop-blur-sm bg-[var(--bg-secondary)] border-[var(--border-primary)]">
-        <LoginHeader />
+        <SignupHeader />
         <div className="px-6 sm:px-8 lg:px-10 pb-8">
           <form onSubmit={handleSubmit} className="space-y-8">
-            <LoginForm formData={formData} handleChange={handleChange} />
-            <LoginDivider />
-            <GoogleLoginButton />
-            <LoginButton />
+            <NameFields formData={formData} handleChange={handleChange} />
+            <FormInput
+              label="Email Address"
+              type="email"
+              name="email"
+              placeholder="e.g. johnsmith@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              width="w-[83%]"
+            />
+            <FormInput
+              label="Password"
+              type="password"
+              name="password"
+              placeholder="••••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              width="w-[83%]"
+            />
+            <FormDivider />
+            <GoogleSignupButton />
+            <SubmitButton />
           </form>
         </div>
-        <LoginFooter />
+        <SignupFooter />
       </div>
     </div>
   );
