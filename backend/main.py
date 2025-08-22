@@ -4,8 +4,8 @@ from pydantic import BaseModel
 from supabase import create_client, Client
 import uvicorn
 
-url = "https://hqspkkyeajsppmttzqen.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhxc3Bra3llYWpzcHBtdHR6cWVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2OTEwNTAsImV4cCI6MjA3MTI2NzA1MH0.bBCrzYIJFRC_z2IKcMp7Dw7zur30_A6g1S3jPVW2B1Q"  # ⚠️ service_role only in backend
+url = "https://vyejkqeqwplixedypgmk.supabase.co" 
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5ZWprcWVxd3BsaXhlZHlwZ21rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4NjY2NzgsImV4cCI6MjA3MTQ0MjY3OH0.yrdGuVsDg-auwu8OAJHHNSKpaIOgEfcb7wSdFqq-9R4"
 supabase: Client = create_client(url, key)
 
 app = FastAPI()
