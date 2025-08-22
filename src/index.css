@@ -49,9 +49,75 @@ html, body {
   scrollbar-color: var(--border-primary) var(--bg-primary);
 }
 
+/* Modal animations and z-index management */
+.modal-backdrop {
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  animation: slideIn 0.3s ease-out;
+  /* No blur on modal content - keep it sharp */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Enhanced blur effects for modal backdrop only */
+.modal-backdrop-enhanced {
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Custom blur classes for better control */
+.bg-blur-custom {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.bg-blur-strong {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* Focus styles for better accessibility */
+input:focus, button:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: var(--text-accent);
+}
+
+/* Smooth transitions for blur effects */
+.blur-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 :root {
   /* Background Colors */
-  --bg-primary: #0f172a;
+  --bg-primary: #0B1020;
   --bg-secondary: #1e293b;
   --bg-input: #0f172a;
   --bg-accent: #EEF4FF;
@@ -59,13 +125,14 @@ html, body {
   /* Text Colors */
   --text-primary:#FFFFFF;
   --text-secondary: #EEF4FF;
-  --text-sidebar: #7C5CFF;
   --text-muted: #98A6D8;
+  --text-sidebar: #7C5CFF;
   --text-accent: #a855f7;
   
   /* Border Colors */
   --border-primary: #475569;
   --border-input: #98A6D8;
+  --border-model: #49516D;
   --border-accent: #a855f7;
   
   /* Button Colors */

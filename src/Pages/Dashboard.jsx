@@ -8,6 +8,8 @@ import Footer from "../components/global/Footer";
 export default function Dashboard() {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   useEffect(() => {
     // Check if user is authenticated
@@ -39,13 +41,31 @@ export default function Dashboard() {
     setIsSidebarOpen(false);
   };
 
+  const handleProfileModalChange = (isOpen) => {
+    console.log('Profile modal state changed:', isOpen); // Debug log
+    setIsProfileModalOpen(isOpen);
+  };
+
+  const handleLogoutModalChange = (isOpen) => {
+    console.log('Logout modal state changed:', isOpen); // Debug log
+    setIsLogoutModalOpen(isOpen);
+  };
+
+  // Check if any modal is open
+  const isAnyModalOpen = isProfileModalOpen || isLogoutModalOpen;
+
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] font-['Inter',sans-serif] flex flex-col scroll-smooth">
       {/* Header */}
-      <Header onLogout={handleLogout} onMenuToggle={toggleSidebar} />
+      <Header 
+        onLogout={handleLogout} 
+        onMenuToggle={toggleSidebar} 
+        onProfileModalChange={handleProfileModalChange}
+        onLogoutModalChange={handleLogoutModalChange}
+      />
       
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-1 lg:p-2 relative overflow-hidden">
+      <div className={`flex-1 flex flex-col lg:flex-row gap-4 p-1 lg:p-2 relative overflow-hidden transition-all duration-300 ${isAnyModalOpen ? 'bg-blur-strong' : ''}`}>
         {/* Mobile Overlay */}
         {isSidebarOpen && (
           <div 
@@ -62,13 +82,29 @@ export default function Dashboard() {
         </div>
         
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-y-auto scroll-smooth">
+        <div 
+          className="flex-1 overflow-y-auto scroll-smooth transition-all duration-300"
+          style={{
+            filter: isAnyModalOpen ? 'blur(2px)' : 'blur(0px)',
+            transform: isAnyModalOpen ? 'scale(0.99)' : 'scale(1)',
+            opacity: isAnyModalOpen ? '0.9' : '1'
+          }}
+        >
           <DashboardContent />
         </div>
       </div>
       
       {/* Footer */}
-      <Footer />
+      <div 
+        className="transition-all duration-300"
+        style={{
+          filter: isAnyModalOpen ? 'blur(2px)' : 'blur(0px)',
+          transform: isAnyModalOpen ? 'scale(0.99)' : 'scale(1)',
+          opacity: isAnyModalOpen ? '0.9' : '1'
+        }}
+      >
+        <Footer />
+      </div>
     </div>
   );
 }
