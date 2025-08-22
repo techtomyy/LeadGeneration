@@ -8,10 +8,10 @@ export default function DashboardContent() {
           <p className="text-sm sm:text-base text-[var(--text-muted)]">Real-time scraping • Multi-source • Email verification</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-          <button className="px-3 sm:px-4 py-2 bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
+          <button className=" h-auto px-3 sm:px-4 py-2 bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-primary)] transition-colors text-sm">
             Plan: Pro
           </button>
-          <button className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[var(--btn-primary)] to-[var(--btn-secondary)] text-[var(--bg-accent)] rounded-lg font-semibold hover:shadow-lg transition-shadow text-sm sm:text-base" style={{ background: 'var(--btn-gradient)' }}>
+          <button className="h-auto items-center px-4 sm:px-4 py-2 sm:py-2 bg-gradient-to-r from-[var(--btn-primary)] to-[var(--btn-secondary)] text-[var(--bg-accent)] rounded-lg font-semibold hover:shadow-lg transition-shadow text-sm sm:text-sm" style={{ background: 'var(--btn-gradient)' }}>
             New Lead Search
           </button>
         </div>
