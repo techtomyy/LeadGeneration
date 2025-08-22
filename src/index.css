@@ -16,14 +16,6 @@ html, body {
   min-height: 100vh;
 }
 
-/* Full screen background */
-.min-h-screen {
-  min-height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   /* Background Colors */
   --bg-primary: #0f172a;
@@ -32,9 +24,10 @@ html, body {
   --bg-accent: #EEF4FF;
   
   /* Text Colors */
-  --text-primary: #EEF4FF;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-primary:#FFFFFF;
+  --text-secondary: #EEF4FF;
+  --text-sidebar: #7C5CFF;
+  --text-muted: #98A6D8;
   --text-accent: #a855f7;
   
   /* Border Colors */
@@ -43,7 +36,10 @@ html, body {
   --border-accent: #a855f7;
   
   /* Button Colors */
-  --btn-primary: #a855f7;
-  --btn-secondary: #3b82f6;
+  --btn-primary: #4A37FF;
+  --btn-secondary: #7C5CFF;
   --btn-hover: #9333ea;
+  
+  /* Button Gradient */
+  --btn-gradient: linear-gradient(289.86deg, #4A37FF 17.64%, #7C5CFF 82.92%);
 }

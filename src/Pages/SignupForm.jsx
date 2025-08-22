@@ -47,7 +47,7 @@ export default function Signup() {
               placeholder="e.g. johnsmith@example.com"
               value={formData.email}
               onChange={handleChange}
-              width="w-[83%]"
+              width="w-full"
             />
 
             {/* Password Field */}
@@ -58,7 +58,7 @@ export default function Signup() {
               placeholder="••••••••••"
               value={formData.password}
               onChange={handleChange}
-              width="w-[83%]"
+              width="w-full"
             />
 
             {/* Divider */}
@@ -70,11 +70,11 @@ export default function Signup() {
             {/* Submit Button */}
             <SubmitButton />
           </form>
-        </div>
 
         {/* Footer */}
         <SignupFooter />
       </div>
+    </div>
     </div>
   );
 }

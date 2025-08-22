@@ -2,7 +2,7 @@ import FormInput from './FormInput';
 
 export default function NameFields({ formData, handleChange }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 my-8">
+    <div className="space-y-6">
       <FormInput
         label="First Name"
         type="text"
@@ -10,7 +10,7 @@ export default function NameFields({ formData, handleChange }) {
         placeholder="e.g. John"
         value={formData.firstName}
         onChange={handleChange}
-        width="w-[83%]"
+        width="w-full"
       />
       <FormInput
         label="Last Name"
@@ -19,7 +19,7 @@ export default function NameFields({ formData, handleChange }) {
         placeholder="e.g. Smith"
         value={formData.lastName}
         onChange={handleChange}
-        width="w-[83%]"
+        width="w-full"
       />
     </div>
   );
