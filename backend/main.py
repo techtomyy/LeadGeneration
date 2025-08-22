@@ -3,9 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from supabase import create_client, Client
 import uvicorn
+import os
+import dotenv
 
-url = "https://vyejkqeqwplixedypgmk.supabase.co" 
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5ZWprcWVxd3BsaXhlZHlwZ21rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4NjY2NzgsImV4cCI6MjA3MTQ0MjY3OH0.yrdGuVsDg-auwu8OAJHHNSKpaIOgEfcb7wSdFqq-9R4"
+dotenv.load_dotenv()
+
+url = os.getenv("SUPRABASE_URL")
+key = os.getenv("SUPRABASE_KEY")
 supabase: Client = create_client(url, key)
 
 app = FastAPI()
