@@ -115,7 +115,7 @@ export default function Sidebar({ currentPage = 'dashboard' }) {
   };
 
   return (
-    <aside className="w-full lg:w-64 h-full bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] border border-[var(--border-input)] rounded-2xl shadow-xl backdrop-blur-sm scroll-smooth">
+    <aside className="w-auto h-full bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] border border-[var(--border-input)] rounded-2xl shadow-xl backdrop-blur-sm scroll-smooth">
       <nav className="p-3 lg:p-6 h-full overflow-y-auto scroll-smooth">
         {/* Main Section */}
         <div className="mb-4 lg:mb-6 flex flex-col">

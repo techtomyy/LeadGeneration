@@ -45,7 +45,7 @@ export default function Dashboard() {
       <Header onLogout={handleLogout} onMenuToggle={toggleSidebar} />
       
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-2 lg:p-4 relative overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-1 lg:p-2 relative overflow-hidden">
         {/* Mobile Overlay */}
         {isSidebarOpen && (
           <div 

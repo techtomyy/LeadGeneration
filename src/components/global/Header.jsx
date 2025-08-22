@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function Header({ onLogout, showAuthButtons = true, onMenuToggle }) {        
   return (
-    <header className="h-20 lg:h-24 w-auto bg-transparent border border-[var(--border-input)] rounded-md px-3 lg:px-6 py-3 lg:py-4 m-2 shadow-lg">
+    <header className=" w-auto h-20 lg:h-24 bg-transparent border border-[var(--border-input)] rounded-md px-3 lg:px-6 py-3 lg:py-4 m-2 shadow-lg">
       <div className="flex items-center justify-between">
         {/* Left side - Logo and Company Info */}
         <div className="flex items-center space-x-2 lg:space-x-3">
