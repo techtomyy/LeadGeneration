@@ -142,4 +142,8 @@ input:focus, button:focus {
   
   /* Button Gradient */
   --btn-gradient: linear-gradient(289.86deg, #4A37FF 17.64%, #7C5CFF 82.92%);
+  
+  /* Accent Colors */
+  --accent-primary: #7C5CFF;
+  --accent-secondary: #9333ea;
 }
