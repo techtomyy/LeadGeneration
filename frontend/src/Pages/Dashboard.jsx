@@ -4,12 +4,15 @@ import Header from "../components/global/Header";
 import Sidebar from "../components/global/Sidebar";
 import DashboardContent from "../components/dashboard/DashboardContent";
 import Footer from "../components/global/Footer";
+import { logoutUser } from "../service/authService";
+import Toast from "../components/global/Toast";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     // Check if user is authenticated
@@ -28,9 +31,23 @@ export default function Dashboard() {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('userEmail');
-    navigate('/login');
+    logoutUser();
+    
+    // Show success toast
+    setToast({
+      show: true,
+      message: 'Logged out successfully!',
+      type: 'success'
+    });
+    
+    // Navigate after a short delay to show the toast
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
+  };
+
+  const closeToast = () => {
+    setToast({ show: false, message: '', type: 'success' });
   };
 
   const toggleSidebar = () => {
@@ -105,6 +122,14 @@ export default function Dashboard() {
       >
         <Footer />
       </div>
+      
+      {/* Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.show}
+        onClose={closeToast}
+      />
     </div>
   );
 }

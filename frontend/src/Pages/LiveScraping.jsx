@@ -4,12 +4,15 @@ import Header from "../components/global/Header";
 import Sidebar from "../components/global/Sidebar";
 import Footer from "../components/global/Footer";
 import LiveScrapingContent from "../components/livescraping/LiveScrapingContent";
+import { logoutUser } from "../service/authService";
+import Toast from "../components/global/Toast";
 
 export default function LiveScraping() {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const isAnyModalOpen = isProfileModalOpen || isLogoutModalOpen;
 
@@ -25,8 +28,23 @@ export default function LiveScraping() {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/login');
+    logoutUser();
+    
+    // Show success toast
+    setToast({
+      show: true,
+      message: 'Logged out successfully!',
+      type: 'success'
+    });
+    
+    // Navigate after a short delay to show the toast
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
+  };
+
+  const closeToast = () => {
+    setToast({ show: false, message: '', type: 'success' });
   };
 
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
@@ -78,6 +96,14 @@ export default function LiveScraping() {
       </div>
 
       <Footer />
+      
+      {/* Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.show}
+        onClose={closeToast}
+      />
     </div>
   );
 }

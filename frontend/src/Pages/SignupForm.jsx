@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../service/authService"; // import the service
+import { registerUser } from "../service/authService";
 import SignupHeader from "../components/signup/SignupHeader";
 import NameFields from "../components/signup/NameFields";
 import FormInput from "../components/signup/FormInput";
@@ -7,6 +7,7 @@ import FormDivider from "../components/signup/FormDivider";
 import GoogleSignupButton from "../components/signup/GoogleSignupButton";
 import SubmitButton from "../components/signup/SubmitButton";
 import SignupFooter from "../components/signup/SignupFooter";
+import Toast from "../components/global/Toast";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -15,25 +16,54 @@ export default function Signup() {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const res = await registerUser({
+      await registerUser({
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email,
         password: formData.password,
       });
-      console.log("User registered:", res);
-      alert("Signup successful!");
+      
+      // Show success toast
+      setToast({
+        show: true,
+        message: 'Account created successfully! Please check your email to confirm your account.',
+        type: 'success'
+      });
+      
+      // Clear form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
+      
     } catch (error) {
       console.error("Signup failed:", error);
-      alert("Signup failed: " + error);
+      
+      // Show error toast
+      setToast({
+        show: true,
+        message: `Signup failed: ${error}`,
+        type: 'error'
+      });
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const closeToast = () => {
+    setToast({ show: false, message: '', type: 'success' });
   };
 
   return (
@@ -63,11 +93,19 @@ export default function Signup() {
             />
             <FormDivider />
             <GoogleSignupButton />
-            <SubmitButton />
+            <SubmitButton isLoading={isLoading} />
           </form>
           <SignupFooter />
         </div>
       </div>
+      
+      {/* Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.show}
+        onClose={closeToast}
+      />
     </div>
   );
 }

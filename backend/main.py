@@ -16,8 +16,9 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # React dev servers
-    allow_credentials=True,
+    # Development: open CORS to all origins; tighten for prod
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -67,20 +68,31 @@ class LoginRequest(BaseModel):
 
 @app.post("/login")
 def login_user(data: LoginRequest):
+    try:
+        auth_res = supabase.auth.sign_in_with_password(
+            {"email": data.email, "password": data.password}
+        )
 
-    auth_res = supabase.auth.sign_in_with_password(
-        {"email": data.email, "password": data.password}
-    )
+        if not auth_res.user:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    if not auth_res.user:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
-    return {
-        "message": "Login successful",
-        "user_id": auth_res.user.id,
-        "access_token": auth_res.session.access_token,
-        "refresh_token": auth_res.session.refresh_token,
-    }
+        return {
+            "message": "Login successful",
+            "user_id": auth_res.user.id,
+            "access_token": auth_res.session.access_token,
+            "refresh_token": auth_res.session.refresh_token,
+        }
+    except Exception as e:
+        # Handle specific Supabase auth errors
+        msg = str(e)
+        if "Email not confirmed" in msg:
+            raise HTTPException(status_code=400, detail="Please check your email and click the confirmation link before logging in")
+        elif "Invalid login credentials" in msg:
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        else:
+            # Log the actual error for debugging
+            print(f"Login error: {msg}")
+            raise HTTPException(status_code=500, detail="Login failed. Please try again.")
 
 
 if __name__ == "__main__":
