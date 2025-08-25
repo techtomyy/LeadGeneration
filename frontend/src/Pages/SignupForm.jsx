@@ -1,5 +1,5 @@
-// src/Signup.jsx
 import { useState } from "react";
+import { registerUser } from "../service/authService"; // import the service
 import SignupHeader from "../components/signup/SignupHeader";
 import NameFields from "../components/signup/NameFields";
 import FormInput from "../components/signup/FormInput";
@@ -16,30 +16,33 @@ export default function Signup() {
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    try {
+      const res = await registerUser({
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log("User registered:", res);
+      alert("Signup successful!");
+    } catch (error) {
+      console.error("Signup failed:", error);
+      alert("Signup failed: " + error);
+    }
   };
 
   return (
-    <div className="min-h-screen w-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-[var(--bg-primary)] font-['Inter',sans-serif]">
-      <div 
-        className="w-[584px] h-auto max-w-[calc(100vw-32px)] sm:max-w-[calc(100vw-48px)] lg:max-w-[calc(100vw-64px)] xl:max-w-2xl rounded-[20px] shadow-2xl border backdrop-blur-sm bg-[var(--bg-secondary)] border-[var(--border-primary)] border mx-4 sm:mx-6 lg:mx-8"
-      >
-        {/* Header */}
+    <div className="min-h-screen w-screen flex items-center justify-center bg-[var(--bg-primary)]">
+      <div className="w-[584px] rounded-[20px] shadow-2xl border backdrop-blur-sm bg-[var(--bg-secondary)] border-[var(--border-primary)]">
         <SignupHeader />
-
-        {/* Form */}
         <div className="px-6 sm:px-8 lg:px-10 pb-8">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Name Fields Row */}
             <NameFields formData={formData} handleChange={handleChange} />
-
-            {/* Email Field */}
             <FormInput
               label="Email Address"
               type="email"
@@ -49,8 +52,6 @@ export default function Signup() {
               onChange={handleChange}
               width="w-full"
             />
-
-            {/* Password Field */}
             <FormInput
               label="Password"
               type="password"
@@ -60,21 +61,13 @@ export default function Signup() {
               onChange={handleChange}
               width="w-full"
             />
-
-            {/* Divider */}
             <FormDivider />
-
-            {/* Google Sign Up */}
             <GoogleSignupButton />
-
-            {/* Submit Button */}
             <SubmitButton />
           </form>
-
-        {/* Footer */}
-        <SignupFooter />
+          <SignupFooter />
+        </div>
       </div>
-    </div>
     </div>
   );
 }
